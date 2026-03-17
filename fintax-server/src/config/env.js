@@ -17,7 +17,7 @@ module.exports = {
   clientUrl: process.env.CLIENT_URL || 'http://localhost:5173',
   serverPublicUrl: process.env.SERVER_PUBLIC_URL || `http://localhost:${process.env.PORT || 3001}`,
   pythonCommand: process.env.PYTHON_COMMAND || 'python',
-  aiImageAutogenEnabled: process.env.AI_IMAGE_AUTOGEN_ENABLED !== 'false',
+  aiImageAutogenEnabled: process.env.AI_IMAGE_AUTOGEN_ENABLED === 'true',
   aiImageAutogenMaxImages: Math.max(1, toNumber(process.env.AI_IMAGE_AUTOGEN_MAX_IMAGES, 2)),
   aiImageRetentionHours: Math.max(1, toNumber(process.env.AI_IMAGE_RETENTION_HOURS, 72)),
   aiImageCleanupIntervalMinutes: Math.max(5, toNumber(process.env.AI_IMAGE_CLEANUP_INTERVAL_MINUTES, 30)),
