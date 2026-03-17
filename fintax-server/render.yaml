@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: fintax-api
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: MONGODB_URI
+        sync: false
+      - key: DB_NAME
+        value: fintax_web
+      - key: CRAWLER_DB_NAME
+        value: fintax_crawler
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CLIENT_URL
+        sync: false
+      - key: SERVER_PUBLIC_URL
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_API_KEY_2
+        sync: false
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_MODEL_PRIMARY
+        value: openai/gpt-oss-120b
+      - key: GROQ_MODEL_FALLBACK
+        value: llama-3.3-70b-versatile
+      - key: GROQ_ROUTER_MODEL
+        value: openai/gpt-oss-20b
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: AI_IMAGE_AUTOGEN_ENABLED
+        value: "false"
+      - key: PYTHON_COMMAND
+        value: python3

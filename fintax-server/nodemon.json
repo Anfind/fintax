@@ -1,0 +1,5 @@
+{
+  "watch": ["src"],
+  "ext": "js,json",
+  "ignore": ["artifacts/**", "python/**", "node_modules/**", "*.tmp"]
+}
