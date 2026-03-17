@@ -82,10 +82,19 @@ app.use(errorHandler);
 
 // ─── Start ──────────────────────────────────────────────
 const start = async () => {
+  // Listen FIRST so Render detects the port immediately
+  server.listen(env.port, '0.0.0.0', () => {
+    console.log(`\n🚀 FinTax API running on 0.0.0.0:${env.port}`);
+    console.log(`   Environment: ${env.nodeEnv}`);
+    console.log(`   Socket.io:   enabled`);
+    console.log(`   Client URL:  ${allowedOrigins.join(', ')}\n`);
+  });
+
+  // Connect DB after server is already listening
   try {
     await connectDB();
   } catch (err) {
-    console.error('⚠ Database connection failed, starting server anyway:', err.message);
+    console.error('⚠ Database connection failed:', err.message);
   }
 
   // Start Telegram bot (non-blocking)
@@ -94,13 +103,6 @@ const start = async () => {
 
   // Start periodic cleanup for generated AI image artifacts.
   startArtifactCleanupScheduler();
-
-  server.listen(env.port, () => {
-    console.log(`\n🚀 FinTax API running on http://localhost:${env.port}`);
-    console.log(`   Environment: ${env.nodeEnv}`);
-    console.log(`   Socket.io:   enabled`);
-    console.log(`   Client URL:  ${allowedOrigins.join(', ')}\n`);
-  });
 };
 
 start();
